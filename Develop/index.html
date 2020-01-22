@@ -1,169 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
-      crossorigin="anonymous"
-    />
-    <link
-      href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="style.css" />
-    <title>Work Day Scheduler</title>
-  </head>
 
-  <body>
-    <header class="jumbotron">
-      <h1 class="display-3">Work Day Scheduler</h1>
-      <p class="lead">A simple calendar app for scheduling your work day</p>
-      <p id="currentDay" class="lead"></p>
-    </header>
-    <div class="container">
-      <!-- Timeblocks go here -->
-      <div id="calendar">
-        
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <title>Work Day Scheduler</title>
+</head>
 
-      </div>
+<body>
+  <header class="jumbotron">
+    <h1 class="display-3">Work Day Scheduler</h1>
+    <p class="lead">A simple calendar app for scheduling your work day</p>
+    <p id="currentDay" class="lead"></p>
+  </header>
+  <div class="container">
+    <!-- Timeblocks go here -->
+    <div id="calendar">
+
+
     </div>
-    
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-    <script>
-      var timeOfDay =[
-        {
-          time: "1 AM",
-          description: ""
-        },
+  </div>
 
-        {
-          time: "2 AM",
-          description: ""
-        },
-        {
-          time: "3 AM",
-          description: ""
-        },
-        {
-          time: "4 AM",
-          description: ""
-        },
-        {
-          time: "5 AM",
-          description: ""
-        },
-        {
-          time: "6 AM",
-          description: ""
-        },
-        {
-          time: "7 AM",
-          description: ""
-        },
-        {
-          time: "8 AM",
-          description: ""
-        },
-        {
-          time: "9 AM",
-          description: ""
-        },
-        {
-          time: "10 AM",
-          description: ""
-        },
-        {
-          time: "11 AM",
-          description: ""
-        },
-        {
-          time: "12 PM",
-          description: ""
-        },
-        {
-          time: "1 PM",
-          description: ""
-        },
-        {
-          time: "2 PM",
-          description: ""
-        },
-        {
-          time: "3 PM",
-          description: ""
-        },
-        {
-          time: "4 PM",
-          description: ""
-        },
-        {
-          time: "5 PM",
-          description: ""
-        },
-        {
-          time: "6 PM",
-          description: ""
-        },
-        {
-          time: "7 PM",
-          description: ""
-        },
-        {
-          time: "8 PM",
-          description: ""
-        },
-        {
-          time: "9 PM",
-          description: ""
-        },
-        {
-          time: "10 PM",
-          description: ""
-        },
-        {
-          time: "11PM",
-          description: ""
-        },
-        {
-          time: "12 AM",
-          description: ""
-        },
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+  <script>
 
-      ]
+    var now = moment();
+    var currentTime = (now.hour()*100);
+    // if (currentTime > 12){
+    //   currentTime = (currentTime - 12);
+    // }
     
-        for(i = 0; i < timeOfDay.length; i++){
-          var calendarEl = $("#calendar");
-        // create a row for each time of day 
-          var newRow = $("<div>").attr("class", "row");
-          //elements to append to the row 
-          var newCol2 = $("<div>").attr("class", "col-2 time-block");
-          var timeP = $("<p>").attr("class","hour");
-          timeP.text(timeOfDay[i].time);
-          var newCol8 = $("<div>").attr("class", "col-8 description");
-          var newDescription = $("<textarea>");
-          newCol8.append(newDescription);
-          var newColSave = $("<div>").attr("class","col-2 saveBtn" );
-          var newSaveBtn = $("<button>").text("save").attr("class", "saveBtn");
-          newColSave.append(newSaveBtn);
-         //append new elements to the row
-         newCol2.append(timeP);
-          newRow.append(newCol2).append(newCol8).append(newColSave);
-          //append the row to the calendar
-          calendarEl.append(newRow);
-  
-        };
-        $(".saveBtn").on("click", function(){
-          $(this).text()
-        })
-    </script>
-  </body>
+    console.log(currentTime);
+
+
+    var timeOfDay = [
+      {
+        time: "900",
+        description: "Test description 1"
+      },
+      {
+        time: "1000",
+        description: "Test description 2"
+      },
+      {
+        time: "1100",
+        description: "Test description 3"
+      },
+      {
+        time: "1200",
+        description: ""
+      },
+      {
+        time: "1300",
+        description: ""
+      },
+      {
+        time: "1400",
+        description: ""
+      },
+      {
+        time: "1500",
+        description: ""
+      },
+      {
+        time: "1600",
+        description: ""
+      },
+      {
+        time: "1700",
+        description: ""
+      },
+      {
+        time: "1800",
+        description: ""
+      },
+      {
+        time: "1900",
+        description: ""
+      }, {
+        time: "2000",
+        description: ""
+      }
+      
+
+
+    ]
+
+    for (i = 0; i < timeOfDay.length; i++) {
+      
+      var calendarEl = $("#calendar");
+      // create a row for each time of day 
+      var newRow = $("<div>").attr("class", "row");
+      //elements to append to the row 
+      var newCol2 = $("<div>").attr("class", "col-2 time-block");
+      var timeP = $("<p>").attr("class", "hour");
+      timeP.text(timeOfDay[i].time);
+      var newCol8 = $("<div>").attr("class", "col-8 description") ;
+      if(currentTime === timeOfDay.time){
+        $(newCol8).addClass("present");
+        $(newCol8).removeClass("past");
+        $(newCol8).removeClass("future");
+       
+      }
+      else if(currentTime > timeOfDay[i].time){
+        $(newCol8).addClass("past");
+        $(newCol8).removeClass("present");
+        $(newCol8).removeClass("future");
+      }
+      else if(currentTime < timeOfDay[i].time){
+        $(newCol8).addClass("future");
+        $(newCol8).removeClass("present");
+        $(newCol8).removeClass("past");
+      }
+      
+      
+
+      var newDescription = $("<textarea>");
+      newDescription.text(timeOfDay[i].description);
+      newCol8.append(newDescription);
+      var newColSave = $("<div>").attr("class", "col-2");
+      var newSaveBtn = $("<button>").attr("class", "fas fa-save saveBtn");
+      newColSave.append(newSaveBtn);
+      //append new elements to the row
+      newCol2.append(timeP);
+      newRow.append(newCol2).append(newCol8).append(newColSave);
+      //append the row to the calendar
+      calendarEl.append(newRow);
+
+    };
+    for (i=0; i <timeOfDay.length; i++){
+
+      var rowId = $()
+    };
+
+
+    $(".saveBtn").on("click", function () {
+      $(this).text()
+    })
+
+
+  </script>
+</body>
+
 </html>
