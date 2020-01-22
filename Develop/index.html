@@ -83,7 +83,7 @@
       },
       {
         time: "1900",
-        description: ""
+        description: "default text"
       }, {
         time: "2000",
         description: ""
@@ -102,11 +102,13 @@
       var newCol2 = $("<div>").attr("class", "col-2 time-block");
       var timeP = $("<p>").attr("class", "hour");
       timeP.text(timeOfDay[i].time);
-      var newCol8 = $("<div>").attr("class", "col-8 description") ;
+      var newCol8 = $("<div>").attr("class", "col-8 description present") ; //?????
       if(currentTime === timeOfDay.time){
         $(newCol8).addClass("present");
         $(newCol8).removeClass("past");
         $(newCol8).removeClass("future");
+        timeOfDay[i].description = "Current line";
+        console.log(timeOfDay);
        
       }
       else if(currentTime > timeOfDay[i].time){
@@ -133,13 +135,15 @@
       newRow.append(newCol2).append(newCol8).append(newColSave);
       //append the row to the calendar
       calendarEl.append(newRow);
+      
 
     };
-    for (i=0; i <timeOfDay.length; i++){
+    // for (i=0; i <timeOfDay.length; i++){
 
-      var rowId = $()
-    };
-
+    //   var rowId = $()
+    // };
+  
+    console.log(timeOfDay);
 
     $(".saveBtn").on("click", function () {
       $(this).text()
