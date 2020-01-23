@@ -41,7 +41,7 @@
 
 
     var timeOfDay = [
-      {
+      { 
         time: "900",
         description: "Test description 1"
       },
@@ -102,13 +102,11 @@
       var newCol2 = $("<div>").attr("class", "col-2 time-block");
       var timeP = $("<p>").attr("class", "hour");
       timeP.text(timeOfDay[i].time);
-      var newCol8 = $("<div>").attr("class", "col-8 description present") ; //?????
+      var newCol8 = $("<div>").attr("class", "col-8 description present").attr("id",timeOfDay[i].time) ; //?????
       if(currentTime === timeOfDay.time){
         $(newCol8).addClass("present");
         $(newCol8).removeClass("past");
         $(newCol8).removeClass("future");
-        timeOfDay[i].description = "Current line";
-        console.log(timeOfDay);
        
       }
       else if(currentTime > timeOfDay[i].time){
@@ -128,7 +126,7 @@
       newDescription.text(timeOfDay[i].description);
       newCol8.append(newDescription);
       var newColSave = $("<div>").attr("class", "col-2");
-      var newSaveBtn = $("<button>").attr("class", "fas fa-save saveBtn");
+      var newSaveBtn = $("<button>").attr("class", "fas fa-save saveBtn").attr("id",timeOfDay[i].time);
       newColSave.append(newSaveBtn);
       //append new elements to the row
       newCol2.append(timeP);
@@ -138,18 +136,29 @@
       
 
     };
-    // for (i=0; i <timeOfDay.length; i++){
-
-    //   var rowId = $()
-    // };
+    
   
     console.log(timeOfDay);
 
     $(".saveBtn").on("click", function () {
-      $(this).text()
-    })
-
-
+      var rowId = $(this).attr("id");
+      var thisRow = $(this).parent().parent();
+      var testString = $(thisRow).find(".description").text()  ;
+      timeOfDay.keys(rowId).description = testString;
+      console.log(thisRow);
+      console.log(testString);
+      // console.log( timeOfDay.keys(rowId).description);
+      for (i=0; i < timeOfDay.length; i++){
+        if(timeOfDay.time === rowId){
+          // timeOfDay[i].description = testString;
+          // console.log(timeOfDay[i].description);
+          console.log("save button if statement");
+        }
+           
+      };
+    });
+    
+    // console.log(timeOfDay[i].description);
   </script>
 </body>
 
