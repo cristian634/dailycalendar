@@ -30,7 +30,7 @@
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
   <script>
-
+    descriptionList = JSON.parse(localStorage.getItem("descriptionList"));
     var now = moment();
     var currentTime = (now.hour()*100);
     // if (currentTime > 12){
@@ -76,23 +76,35 @@
       {
         time: "1700",
         description: ""
-      },
-      {
-        time: "1800",
-        description: ""
-      },
-      {
-        time: "1900",
-        description: "default text"
-      }, {
-        time: "2000",
-        description: ""
       }
+    
       
 
 
     ]
-
+    var descriptionList = [
+      "test1",
+      "test2",
+      "test3",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ]
+    // var descriptionList =[
+    //   {"900":"test1"},
+    //   {"1000":"test2"},
+    //   {"1100":"test3"},
+    //   {"1200":"test4"},
+    //   {"1300":"test5"},
+    //   {"1400":"test6"},
+    //   {"1500":"test7"},
+    //   {"1600":"test8"},
+    //   {"1700":"test9"},
+    // ]
+      descriptionList = JSON.parse(window.localStorage.getItem("descriptionList"));
     for (i = 0; i < timeOfDay.length; i++) {
       
       var calendarEl = $("#calendar");
@@ -103,6 +115,7 @@
       var timeP = $("<p>").attr("class", "hour");
       timeP.text(timeOfDay[i].time);
       var newCol8 = $("<div>").attr("class", "col-8 description present").attr("id",timeOfDay[i].time) ; //?????
+      //change colors depending on time of day
       if(currentTime === timeOfDay.time){
         $(newCol8).addClass("present");
         $(newCol8).removeClass("past");
@@ -121,9 +134,9 @@
       }
       
       
-
+      var currentLine = "line" + [i];
       var newDescription = $("<textarea>");
-      newDescription.text(timeOfDay[i].description);
+      newDescription.text(descriptionList[i]).attr("id","time-"+timeOfDay[i].time);
       newCol8.append(newDescription);
       var newColSave = $("<div>").attr("class", "col-2");
       var newSaveBtn = $("<button>").attr("class", "fas fa-save saveBtn").attr("id",timeOfDay[i].time);
@@ -138,24 +151,21 @@
     };
     
   
-    console.log(timeOfDay);
+    // console.log(timeOfDay);
 
     $(".saveBtn").on("click", function () {
+      event.preventDefault();
       var rowId = $(this).attr("id");
-      var thisRow = $(this).parent().parent();
+      var thisRow = $("#time-"+rowId).val();
       var testString = $(thisRow).find(".description").text()  ;
       timeOfDay.keys(rowId).description = testString;
-      console.log(thisRow);
-      console.log(testString);
-      // console.log( timeOfDay.keys(rowId).description);
-      for (i=0; i < timeOfDay.length; i++){
-        if(timeOfDay.time === rowId){
-          // timeOfDay[i].description = testString;
-          // console.log(timeOfDay[i].description);
-          console.log("save button if statement");
-        }
-           
-      };
+      
+      descriptionCounter = (rowId/100)-9;
+      console.log("counter:" + descriptionCounter);
+      
+      descriptionList[descriptionCounter] = thisRow;
+      console.log(descriptionList);
+      localStorage.setItem("descriptionList", JSON.stringify(descriptionList))
     });
     
     // console.log(timeOfDay[i].description);
