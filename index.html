@@ -30,7 +30,7 @@
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
   <script>
-    descriptionList = JSON.parse(localStorage.getItem("descriptionList"));
+    // descriptionList = JSON.parse(localStorage.getItem("descriptionList"));
     var now = moment();
     var currentTime = (now.hour()*100);
     // if (currentTime > 12){
@@ -104,7 +104,7 @@
     //   {"1600":"test8"},
     //   {"1700":"test9"},
     // ]
-      // descriptionList = JSON.parse(window.localStorage.getItem("descriptionList"));
+      descriptionList = JSON.parse(window.localStorage.getItem("descriptionList"));
     for (i = 0; i < timeOfDay.length; i++) {
       
       var calendarEl = $("#calendar");
