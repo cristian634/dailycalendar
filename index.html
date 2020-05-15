@@ -32,135 +32,156 @@
   <script>
     // descriptionList = JSON.parse(localStorage.getItem("descriptionList"));
     var now = moment();
-    var currentTime = (now.hour()*100);
+    var currentTime = (now.hour() * 100);
+    var descriptionList = []
     // if (currentTime > 12){
     //   currentTime = (currentTime - 12);
     // }
-    
+
     console.log(currentTime);
 
+    window.addEventListener('load', function () {
+      var s = localStorage.getItem("descriptionList");
+      if (s === null) {
+        console.log("Adding defaults.."); //does not enter here
+        descriptionList = [
+          "test1",
+          "test2",
+          "test3",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""];
+        // console.log(descriptionList);
+        localStorage.setItem("descriptionList", JSON.stringify(descriptionList));
 
-    var timeOfDay = [
-      { 
-        time: "900",
-        description: "Test description 1"
-      },
-      {
-        time: "1000",
-        description: "Test description 2"
-      },
-      {
-        time: "1100",
-        description: "Test description 3"
-      },
-      {
-        time: "1200",
-        description: ""
-      },
-      {
-        time: "1300",
-        description: ""
-      },
-      {
-        time: "1400",
-        description: ""
-      },
-      {
-        time: "1500",
-        description: ""
-      },
-      {
-        time: "1600",
-        description: ""
-      },
-      {
-        time: "1700",
-        description: ""
+      } else {
+        // console.log(s); // prints [object *O*bject]
+        // console.log(JSON.parse(s).name);  //getting an error (see below)
+        descriptionList = JSON.parse(window.localStorage.getItem("descriptionList"));
       }
-    
-      
+      var timeOfDay = [
+        {
+          time: "900",
+          description: "Test description 1"
+        },
+        {
+          time: "1000",
+          description: "Test description 2"
+        },
+        {
+          time: "1100",
+          description: "Test description 3"
+        },
+        {
+          time: "1200",
+          description: ""
+        },
+        {
+          time: "1300",
+          description: ""
+        },
+        {
+          time: "1400",
+          description: ""
+        },
+        {
+          time: "1500",
+          description: ""
+        },
+        {
+          time: "1600",
+          description: ""
+        },
+        {
+          time: "1700",
+          description: ""
+        }
 
 
-    ]
-    var descriptionList = [
-      "test1",
-      "test2",
-      "test3",
-      "",
-      "",
-      "",
-      "",
-      "",
-      ""
-    ]
 
-      
-      descriptionList = JSON.parse(window.localStorage.getItem("descriptionList"));
-      localStorage.setItem("descriptionList", JSON.stringify(descriptionList)); 
-    for (i = 0; i < timeOfDay.length; i++) {
-      
-      var calendarEl = $("#calendar");
-      // create a row for each time of day 
-      var newRow = $("<div>").attr("class", "row");
-      //elements to append to the row 
-      var newCol2 = $("<div>").attr("class", "col-2 time-block");
-      var timeP = $("<p>").attr("class", "hour");
-      timeP.text(timeOfDay[i].time);
-      var newCol8 = $("<div>").attr("class", "col-8 description present").attr("id",timeOfDay[i].time) ; //?????
-      //change colors depending on time of day
-      if(currentTime === timeOfDay.time){
-        $(newCol8).addClass("present");
-        $(newCol8).removeClass("past");
-        $(newCol8).removeClass("future");
-       
-      }
-      else if(currentTime > timeOfDay[i].time){
-        $(newCol8).addClass("past");
-        $(newCol8).removeClass("present");
-        $(newCol8).removeClass("future");
-      }
-      else if(currentTime < timeOfDay[i].time){
-        $(newCol8).addClass("future");
-        $(newCol8).removeClass("present");
-        $(newCol8).removeClass("past");
-      }
-      
-      
-      var currentLine = "line" + [i];
-      var newDescription = $("<textarea>");
-      newDescription.text(descriptionList[i]).attr("id","time-"+timeOfDay[i].time);
-      console.log(newDescription);
-      newCol8.append(newDescription);
-      var newColSave = $("<div>").attr("class", "col-2");
-      var newSaveBtn = $("<button>").attr("class", "fas fa-save saveBtn").attr("id",timeOfDay[i].time);
-      newColSave.append(newSaveBtn);
-      //append new elements to the row
-      newCol2.append(timeP);
-      newRow.append(newCol2).append(newCol8).append(newColSave);
-      //append the row to the calendar
-      calendarEl.append(newRow);
-      
 
-    };
-    
-  
-    // console.log(timeOfDay);
+      ]
 
-    $(".saveBtn").on("click", function () {
+
+
+
+
+      for (i = 0; i < timeOfDay.length; i++) {
+
+        var calendarEl = $("#calendar");
+        // create a row for each time of day 
+        var newRow = $("<div>").attr("class", "row");
+        //elements to append to the row 
+        var newCol2 = $("<div>").attr("class", "col-2 time-block");
+        var timeP = $("<p>").attr("class", "hour");
+        timeP.text(timeOfDay[i].time);
+        var newCol8 = $("<div>").attr("class", "col-8 description present").attr("id", timeOfDay[i].time); //?????
+        //change colors depending on time of day
+        if (currentTime === timeOfDay.time) {
+          $(newCol8).addClass("present");
+          $(newCol8).removeClass("past");
+          $(newCol8).removeClass("future");
+
+        }
+        else if (currentTime > timeOfDay[i].time) {
+          $(newCol8).addClass("past");
+          $(newCol8).removeClass("present");
+          $(newCol8).removeClass("future");
+        }
+        else if (currentTime < timeOfDay[i].time) {
+          $(newCol8).addClass("future");
+          $(newCol8).removeClass("present");
+          $(newCol8).removeClass("past");
+        }
+
+
+        var currentLine = "line" + [i];
+        var newDescription = $("<textarea>");
+        newDescription.text(descriptionList[i]).attr("id", "time-" + timeOfDay[i].time);
+        // console.log(newDescription);
+        newCol8.append(newDescription);
+        var newColSave = $("<div>").attr("class", "col-2");
+        var newSaveBtn = $("<button>").attr("class", "fas fa-save saveBtn").attr("id", timeOfDay[i].time);
+        newColSave.append(newSaveBtn);
+        //append new elements to the row
+        newCol2.append(timeP);
+        newRow.append(newCol2).append(newCol8).append(newColSave);
+        //append the row to the calendar
+        calendarEl.append(newRow);
+
+
+      };
+
+      $(".saveBtn").on("click", function () {
       event.preventDefault();
       var rowId = $(this).attr("id");
-      var thisRow = $("#time-"+rowId).val();
-      var testString = $(thisRow).find(".description").text()  ;
+      var thisRow = $("#time-" + rowId).val();
+      var testString = $(thisRow).find(".description").text();
       timeOfDay.keys(rowId).description = testString;
-      
-      descriptionCounter = (rowId/100)-9;
+
+      descriptionCounter = (rowId / 100) - 9;
       console.log("counter:" + descriptionCounter);
-      
+
       descriptionList[descriptionCounter] = thisRow;
       console.log(descriptionList);
       localStorage.setItem("descriptionList", JSON.stringify(descriptionList))
+
+      console.log("New item added");
     });
+    }, false);
+
+    // console.log("Description list: " + descriptionList);
+
+
+
+
+    // console.log(timeOfDay);
+
     
+
     // console.log(timeOfDay[i].description);
   </script>
 </body>
